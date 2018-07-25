@@ -1,8 +1,9 @@
 ##############################################################################
 #               blacklist for adult sites                                    #
 ##############################################################################
-.tube8.com
-127.0.0.1	pornhub.com
-example.org
-.example2.org
+tube8.com
+www.tube8.com
+pornhub.com
+www.pornhub.com
 digdolls.com
+.digdolls.com
