@@ -1,9 +1,10 @@
 ##############################################################################
 #               blacklist for adult sites                                    #
+#                                                                            #
+# this list should be added to pi-hole adlists.list                          #
+# entries are automatically added to gravity.list                            #
 ##############################################################################
 tube8.com
 www.tube8.com
 pornhub.com
 www.pornhub.com
-digdolls.com
-.digdolls.com
