@@ -2,5 +2,5 @@
 #   this file contains links that should be included as lists in pi-hole adlists.list   #
 ######################################################################################### 
 
-https://raw.githubusercontent.com/rezgalis/pi-hole-addon/master/blacklists/adult.txt
-https://raw.githubusercontent.com/rezgalis/pi-hole-addon/master/blacklists/gambling.txt
+https://github.com/rezgalis/pi-hole-addon/blob/master/blacklists/gambling.txt
+https://github.com/rezgalis/pi-hole-addon/blob/master/blacklists/adult.txt
