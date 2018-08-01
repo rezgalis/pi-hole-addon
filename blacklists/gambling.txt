@@ -4,5 +4,3 @@
 # this list should be added to pi-hole adlists.list                          #
 # entries are automatically added to gravity.list                            #
 ##############################################################################
-www.optibet.lv
-optibet.lv
