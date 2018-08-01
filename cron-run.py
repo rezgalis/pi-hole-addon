@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 
-import sys, os, hashlib, subprocess, shutil
+import sys, os, datetime, hashlib, subprocess, shutil
 
 
 
@@ -34,9 +34,13 @@ def trigger_daily_job():
 
 
 if __name__== "__main__":
+	print "cron-run.py @", datetime.datetime.now()
 	if daily_job_updated():
 		print "Daily midnight job will be triggered"
 		trigger_daily_job()
+		sys.exit()
+	else:
+		sys.exit()
 
 #this job is run at midnight every day
 #main purpose of this script is to compare local daily-job.py and one found in repo/ folder (which is latest version, from github); if those are different, local file is overwritten and then executed
