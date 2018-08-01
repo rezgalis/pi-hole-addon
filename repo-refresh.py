@@ -76,7 +76,7 @@ def check_addon_lists_updated():
 
 
 
-def check_updates_exist():
+def check_addlists_updated():
 	if os.path.exists('blacklists/list.txt') and os.path.exists('repo/blacklists/list.txt'):
 		ex_checksum = sha256_checksum('blacklists/list.txt') 
 		new_checksum = sha256_checksum('repo/blacklists/list.txt')
@@ -125,14 +125,14 @@ def write_new_custom_lists():
 
 
 def trigger_pihole_retrieve_lists():
-	subprocess.call(["pihole", "-g"], stdout=open(os.devnull, 'wb'))
+	subprocess.call(["pihole", "-g"])
 
 
 
 if __name__== "__main__":
 	fetch_from_github()
 
-	if check_updates_exist():
+	if check_addlists_updated():
 		print "Updates found for list of lists"
 		remove_prev_custom_lists()
 		write_new_custom_lists()
