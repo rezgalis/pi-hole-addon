@@ -34,9 +34,9 @@ def trigger_daily_job():
 
 
 if __name__== "__main__":
-	print "cron-run.py @", datetime.datetime.now()
+	print 'cron-run.py @', datetime.datetime.now()
 	if daily_job_updated():
-		print "Daily midnight job will be triggered"
+		print 'Daily midnight job will be triggered'
 		trigger_daily_job()
 		sys.exit()
 	else:
