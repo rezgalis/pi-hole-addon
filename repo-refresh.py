@@ -30,11 +30,12 @@ def fetch_from_github():
 	checksum_local = repo.head.commit
 
 	if checksum_remote!=checksum_local or is_new:
-        print 'Changes in repo detected'
+		print 'Changes in repo detected'
 		repo.config_writer().set_value('user', 'name', 'default.repo').release()
 		repo.config_writer().set_value('user', 'email', 'default.repo').release()
 		repo.git.stash()
 		repo.git.merge()
+		shutil.copy('repo/cron-run.py', 'cron-run.py')
 
 
 
@@ -128,20 +129,21 @@ def trigger_pihole_retrieve_lists():
 
 
 
-fetch_from_github()
+if __name__== "__main__":
+	fetch_from_github()
 
-if check_updates_exist():
-	print "Updates found for list of lists"
-	remove_prev_custom_lists()
-	write_new_custom_lists()
-	check_addon_lists_updated() #to copy actual lists
-	trigger_pihole_retrieve_lists()
-	sys.exit()
+	if check_updates_exist():
+		print "Updates found for list of lists"
+		remove_prev_custom_lists()
+		write_new_custom_lists()
+		check_addon_lists_updated() #to copy actual lists
+		trigger_pihole_retrieve_lists()
+		sys.exit()
 
-if check_addon_lists_updated():
-	print "Updates found for individual adlists"
-	trigger_pihole_retrieve_lists()
-	sys.exit()
+	if check_addon_lists_updated():
+		print "Updates found for individual adlists"
+		trigger_pihole_retrieve_lists()
+		sys.exit()
 
 #this job runs every hour
 #it pulls data from github repository and evaluates whether any list data have changes; if so, pi-hole lists refresh is triggered
