@@ -63,6 +63,20 @@ def check_wildcards_updated():
 
 
 
+def check_restricted_updated():
+	if os.path.exists('/etc/dnsmasq.d/95-restrict.conf') and os.path.exists('repo/blacklists/95-restrict.conf'):
+		ex_checksum = sha256_checksum('/etc/dnsmasq.d/95-restrict.conf') 
+		new_checksum = sha256_checksum('repo/blacklists/95-restrict.conf')
+		if ex_checksum != new_checksum:
+			shutil.copy('repo/blacklists/95-restrict.conf', '/etc/dnsmasq.d/95-restrict.conf')
+			return True
+	elif os.path.exists('repo/blacklists/95-restrict.conf'):
+		shutil.copy('repo/blacklists/95-restrict.conf', '/etc/dnsmasq.d/95-restrict.conf')
+		return True
+		
+	return False
+
+
 def check_adlists_contents_updated():
 	updates_found = False
 	
@@ -147,7 +161,7 @@ def trigger_pihole_retrieve_lists():
 if __name__== "__main__":
 	fetch_from_github()
 	
-	if check_wildcards_updated():
+	if check_wildcards_updated() or check_restricted_updated():
 		subprocess.call(["service", "dnsmasq", " restart"])
 
 	if check_addlists_updated():
