@@ -162,6 +162,8 @@ if __name__== "__main__":
 	fetch_from_github()
 	
 	if check_wildcards_updated() or check_restricted_updated():
+		#TO-DO - need to ensure /etc/hosts is also updated if necessary
+		#anything betwween tags "# start pi-hole add-on restrictions" and "# end pi-hole add-on restrictions"
 		subprocess.call(["service", "dnsmasq", " restart"])
 
 	if check_addlists_updated():
