@@ -15,7 +15,6 @@ mkdir repo
 rm .git/ -R
 rm blacklists/*
 rm daily-job.py
-cp blacklists/95-restrict.conf /etc/dnsmasq.d/95-restrict.conf
 
 #chmod cron scripts
 chmod +x dailycron.sh
