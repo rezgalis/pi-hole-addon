@@ -125,7 +125,7 @@ def write_new_custom_lists():
 
 
 def trigger_pihole_retrieve_lists():
-	subprocess.call(["pihole", "-g"])
+	subprocess.call(["pihole", "-g"], stdout=open(os.devnull, 'wb'))
 
 
 
