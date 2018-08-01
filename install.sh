@@ -15,6 +15,10 @@ mkdir repo
 rm .git/ -R
 rm blacklists/*
 rm daily-job.py
+cp blacklists/05-restrict.conf /etc/dnsmasq.d/05-restrict.conf
+
+#TO-DO:
+#need to update (!) /etc/hosts in similar manner as crontab with extra details
 
 #chmod cron scripts
 chmod +x dailycron.sh
