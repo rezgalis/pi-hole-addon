@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 
-import sys, os, hashlib
+import sys, os, hashlib, subprocess, shutil
 
 
 
