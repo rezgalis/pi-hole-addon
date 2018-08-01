@@ -6,7 +6,7 @@
 apt-get install git python-pip -y
 pip install gitpython
 
-#clone git repository and remov unneed files
+#clone git repository and remove unnecessary files
 cd /home/pi
 rm pi-hole-addon/ -R
 git clone https://github.com/rezgalis/pi-hole-addon.git
