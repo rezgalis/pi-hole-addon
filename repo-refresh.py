@@ -48,7 +48,22 @@ def sha256_checksum(filename, block_size=65536):
 
 
 
-def check_addon_lists_updated():
+def check_wildcards_updated():
+	if os.path.exists('/etc/dnsmasq.d/96-custom-wildcard.conf') and os.path.exists('repo/blacklists/96-custom-wildcard.conf'):
+		ex_checksum = sha256_checksum('/etc/dnsmasq.d/96-custom-wildcard.conf') 
+		new_checksum = sha256_checksum('repo/blacklists/96-custom-wildcard.conf')
+		if ex_checksum != new_checksum:
+			shutil.copy('repo/blacklists/96-custom-wildcard.conf', '/etc/dnsmasq.d/96-custom-wildcard.conf')
+			return True
+	elif os.path.exists('repo/blacklists/96-custom-wildcard.conf'):
+		shutil.copy('repo/blacklists/96-custom-wildcard.conf', '/etc/dnsmasq.d/96-custom-wildcard.conf')
+		return True
+		
+	return False
+
+
+
+def check_adlists_contents_updated():
 	updates_found = False
 	
 	if os.path.exists('blacklists/list.txt'):
@@ -131,16 +146,19 @@ def trigger_pihole_retrieve_lists():
 
 if __name__== "__main__":
 	fetch_from_github()
+	
+	if check_wildcards_updated():
+		subprocess.call(["service", "dnsmasq", " restart"])
 
 	if check_addlists_updated():
 		print "Updates found for list of lists"
 		remove_prev_custom_lists()
 		write_new_custom_lists()
-		check_addon_lists_updated() #to copy actual lists
+		check_adlists_contents_updated() #to copy actual lists
 		trigger_pihole_retrieve_lists()
 		sys.exit()
 
-	if check_addon_lists_updated():
+	if check_adlists_contents_updated():
 		print "Updates found for individual adlists"
 		trigger_pihole_retrieve_lists()
 		sys.exit()
