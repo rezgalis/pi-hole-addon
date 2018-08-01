@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 
-import sys, os, hashlib, subprocess, shutil
+import sys, os, datetime, hashlib, subprocess, shutil
 from git import Repo
 
 git_remote = 'https://github.com/rezgalis/pi-hole-addon.git'
@@ -30,7 +30,7 @@ def fetch_from_github():
 	checksum_local = repo.head.commit
 
 	if checksum_remote!=checksum_local or is_new:
-		print 'Changes in repo detected'
+		print 'Changes in repo detected @', datetime.datetime.now()
 		repo.config_writer().set_value('user', 'name', 'default.repo').release()
 		repo.config_writer().set_value('user', 'email', 'default.repo').release()
 		repo.git.stash()
@@ -147,4 +147,3 @@ if __name__== "__main__":
 
 #this job runs every hour
 #it pulls data from github repository and evaluates whether any list data have changes; if so, pi-hole lists refresh is triggered
-
