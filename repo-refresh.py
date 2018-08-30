@@ -165,6 +165,7 @@ if __name__== "__main__":
 		#TO-DO - need to ensure /etc/hosts is also updated if necessary
 		#anything betwween tags "# start pi-hole add-on restrictions" and "# end pi-hole add-on restrictions"
 		#hosts file - we cannot rely on checksum, so we'll update it any time wildcards or restricted is updated
+		#https://discourse.pi-hole.net/t/use-dns-to-force-youtube-into-restricted-mode-and-pi-hole/1996/23
 		subprocess.call(["service", "dnsmasq", " restart"])
 
 	if check_addlists_updated():
